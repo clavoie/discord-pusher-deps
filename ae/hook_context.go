@@ -36,7 +36,7 @@ func (hc *hookContext) Delete(encodedKey string) error {
 		return err
 	}
 
-	time.Sleep(time.Second) // the server will refresh before the db deletes
+	time.Sleep(time.Millisecond * 100) // the server will refresh before the db deletes
 	return nil
 }
 
@@ -99,7 +99,7 @@ func (hc *hookContext) Errorf(format string, args ...interface{}) {
 func (hc *hookContext) Put(dal *types.HookDal) error {
 	key := datastore.NewIncompleteKey(hc.AppContext, webhookKind, nil)
 	_, err := datastore.Put(hc.AppContext, key, dal)
-	time.Sleep(time.Second) // the page will refresh faster than the datastore will read / write
+	time.Sleep(time.Millisecond * 100) // the page will refresh faster than the datastore will read / write
 	return err
 }
 
